@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.airquality" />
+                  <option name="mobileSdkAppId" value="1:369974798796:android:74b9e9ceabbece05cf9569" />
+                  <option name="projectId" value="airquality-e6800" />
+                  <option name="projectNumber" value="369974798796" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
