@@ -24,17 +24,11 @@ class NewsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_news)
 
         recyclerView = findViewById(R.id.recyclerViewNews)
-
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "news_database"
-        ).build()
-
+        db = AppDatabase.getDatabase(applicationContext)
         newsDao = db.newsDao()
 
-//        insertDummyDataIfNeeded()
-        loadNews()
+        // insertDummyDataIfNeeded()
+        observeNews()
     }
 
 //    private fun insertDummyDataIfNeeded() {
@@ -96,12 +90,8 @@ class NewsActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun loadNews() {
-        lifecycleScope.launch {
-            val newsList = withContext(Dispatchers.IO) {
-                newsDao.getAllNews()
-            }
-
+    private fun observeNews() {
+        newsDao.getAllNews().observe(this) { newsList ->
             recyclerView.adapter = NewsAdapter(newsList) { news ->
                 val intent = Intent(this@NewsActivity, DetailNewsActivity::class.java).apply {
                     putExtra("judul", news.judul)

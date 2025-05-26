@@ -1,5 +1,6 @@
 package com.example.airquality.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.airquality.entity.NewsEntity
 
@@ -10,7 +11,7 @@ interface NewsDao {
     suspend fun insertNews(news: NewsEntity)
 
     @Query("SELECT * FROM berita ORDER BY tanggalUpload DESC")
-    suspend fun getAllNews(): List<NewsEntity>
+    fun getAllNews(): LiveData<List<NewsEntity>>
 
     @Query("SELECT * FROM berita WHERE id = :newsId")
     suspend fun getNewsById(newsId: Int): NewsEntity?
