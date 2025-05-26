@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="16dp"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/newsImage"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentTop="true"
+            android:text="Judul Berita"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/textTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textJudul"
+            android:layout_alignStart="@id/textJudul"
+            android:paddingTop="4dp"
+            android:text="26 Mei 2025"
+            android:textSize="12sp"
+            android:textColor="#666666" />
+
+        <TextView
+            android:id="@+id/textPengupload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTanggal"
+            android:layout_alignStart="@id/textTanggal"
+            android:text="Diupload oleh: Admin"
+            android:textSize="12sp"
+            android:textColor="#999999" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
