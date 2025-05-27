@@ -37,7 +37,7 @@
             android:layout_marginTop="4dp"
             android:layout_alignParentTop="true"
             android:text="Judul Berita"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:maxLines="2"
             android:ellipsize="end" />
