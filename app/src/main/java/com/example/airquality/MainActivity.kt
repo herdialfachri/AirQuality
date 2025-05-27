@@ -6,52 +6,64 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.example.airquality.entity.AirQuality
+import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var toNewsActivity: ImageView
     private lateinit var tempDataTextView: TextView
     private lateinit var humiDataTextView: TextView
+    private lateinit var co2DataTextView: TextView
+    private lateinit var coDataTextView: TextView
+    private lateinit var timestampTextView: TextView
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Inisialisasi tampilan
         toNewsActivity = findViewById(R.id.toNewsBtn)
         tempDataTextView = findViewById(R.id.dataTempTv)
         humiDataTextView = findViewById(R.id.dataHumiTv)
+        co2DataTextView = findViewById(R.id.dataCo2Tv)
+        coDataTextView = findViewById(R.id.dataCoTv)
+        timestampTextView = findViewById(R.id.dataTimeTv)
 
-        // Inisialisasi referensi ke database
+        // Inisialisasi database Firebase
         database = FirebaseDatabase.getInstance("https://airquality-e6800-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("air_quality")
 
-        // Ambil data dari Firebase
-        database.addValueEventListener(object : ValueEventListener {
-            @SuppressLint("SetTextI18n")
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val temperature = snapshot.child("temperature").getValue(Double::class.java)
-                val humidity = snapshot.child("humidity").getValue(Double::class.java)
-                val timestamp = snapshot.child("timestamp").getValue(String::class.java)
+        // Ambil data terbaru (dengan orderByChild + limitToLast)
+        database.orderByChild("timestamp").limitToLast(1)
+            .addValueEventListener(object : ValueEventListener {
+                @SuppressLint("SetTextI18n")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (child in snapshot.children) {
+                        val data = child.getValue(AirQuality::class.java)
+                        if (data != null) {
+                            tempDataTextView.text = "${data.temperature}°C"
+                            humiDataTextView.text = "${data.humidity}%"
+                            co2DataTextView.text = "${data.co2_ppm} ppm"
+                            coDataTextView.text = "${data.co_ppm} ppm"
+                            timestampTextView.text = data.timestamp
+                        }
+                    }
+                }
 
-                tempDataTextView.text = "${temperature ?: "-"}°C"
-                humiDataTextView.text = "${humidity ?: "-"}%"
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    tempDataTextView.text = "Error: ${error.message}"
+                    humiDataTextView.text = "Error"
+                    co2DataTextView.text = "Error"
+                    coDataTextView.text = "Error"
+                    timestampTextView.text = "Error"
+                }
+            })
 
-            override fun onCancelled(error: DatabaseError) {
-                tempDataTextView.text = "Gagal memuat data: ${error.message}"
-                humiDataTextView.text = "Gagal memuat data: ${error.message}"
-            }
-        })
-
+        // Navigasi ke NewsActivity
         toNewsActivity.setOnClickListener {
-            val intent = Intent(this, NewsActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, NewsActivity::class.java))
         }
     }
 }

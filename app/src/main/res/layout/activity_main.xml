@@ -53,7 +53,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp">
+            android:padding="16dp">
 
             <ImageView
                 android:id="@+id/temperatureImg"
@@ -91,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/humidityImg"
                 android:layout_alignTop="@id/humidityImg"
+                android:layout_alignBottom="@id/humidityImg"
                 android:layout_marginStart="8dp"
                 android:text="Kelembaban"
                 android:textColor="@color/white"
@@ -103,8 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@id/temperatureImg"
-                android:layout_marginEnd="16dp"
-                android:text="Temp"
+                android:text="--"
                 android:textSize="16sp"
                 android:textColor="@color/white" />
 
@@ -114,7 +114,107 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/humidityImg"
                 android:layout_alignEnd="@id/dataTempTv"
-                android:text="Humi"
+                android:text="--"
+                android:textSize="16sp"
+                android:textColor="@color/white" />
+
+            <!-- Ikon dan teks CO2 -->
+            <ImageView
+                android:id="@+id/co2Img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/humidityTv"
+                android:layout_alignStart="@id/temperatureImg"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/baseline_co2_24" />
+
+            <TextView
+                android:id="@+id/co2Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/co2Img"
+                android:layout_alignTop="@id/co2Img"
+                android:layout_marginStart="8dp"
+                android:layout_alignBottom="@id/co2Img"
+                android:text="Kandungan CO2"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dataCo2Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/co2Img"
+                android:layout_alignEnd="@id/dataTempTv"
+                android:text="--"
+                android:textSize="16sp"
+                android:textColor="@color/white" />
+
+            <!-- Ikon dan teks CO -->
+            <ImageView
+                android:id="@+id/coImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/co2Tv"
+                android:layout_alignStart="@id/temperatureImg"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/baseline_gas_24" />
+
+            <TextView
+                android:id="@+id/coTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/coImg"
+                android:layout_alignTop="@id/coImg"
+                android:layout_marginStart="8dp"
+                android:text="Kandungan CO"
+                android:layout_alignBottom="@id/coImg"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dataCoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/coImg"
+                android:layout_alignEnd="@id/dataTempTv"
+                android:text="--"
+                android:textSize="16sp"
+                android:textColor="@color/white" />
+
+            <!-- Ikon dan teks CO -->
+            <ImageView
+                android:id="@+id/timeImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/coImg"
+                android:layout_alignStart="@id/temperatureImg"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/baseline_access_time_filled_24" />
+
+            <TextView
+                android:id="@+id/timeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/timeImg"
+                android:layout_alignTop="@id/timeImg"
+                android:layout_marginStart="8dp"
+                android:text="Waktu"
+                android:layout_alignBottom="@id/timeImg"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dataTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dataCoTv"
+                android:layout_alignTop="@id/timeImg"
+                android:layout_alignEnd="@id/dataTempTv"
+                android:text="--"
                 android:textSize="16sp"
                 android:textColor="@color/white" />
 
