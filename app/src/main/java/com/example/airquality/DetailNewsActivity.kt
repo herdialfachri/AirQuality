@@ -6,13 +6,21 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class DetailNewsActivity : AppCompatActivity() {
+
+    private lateinit var backButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_news)
+
+        backButton = findViewById(R.id.arrowBackBtnDetail)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
 
         val judul = intent.getStringExtra("judul")
         val deskripsi = intent.getStringExtra("deskripsi")
@@ -29,9 +37,9 @@ class DetailNewsActivity : AppCompatActivity() {
         val tvPengupload: TextView = findViewById(R.id.textViewPengupload)
 
         tvJudul.text = judul
-        tvDeskripsi.text = deskripsi
+        tvDeskripsi.text = deskripsi?.replace("\\n", "\n")
         tvSumber.text = "Sumber: $sumber"
-        tvPengupload.text = "Diupload oleh: $pengupload"
+        tvPengupload.text = "Penulis: $pengupload"
         tvTanggal.text = formatTimestamp(tanggal)
 
         Glide.with(this).load(gambar).into(imgBerita)
