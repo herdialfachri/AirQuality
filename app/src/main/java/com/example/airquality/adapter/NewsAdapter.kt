@@ -36,10 +36,13 @@ class NewsAdapter(
         holder.textJudul.text = news.judul
         holder.textPengupload.text = "Diupload oleh: ${news.pengupload}"
         holder.textTanggal.text = formatTimestamp(news.tanggalUpload)
+
         Glide.with(holder.itemView.context)
             .load(news.gambar)
-            .placeholder(R.drawable.ic_launcher_background) // bisa ganti sesuai kebutuhan
+            .placeholder(R.drawable.ic_launcher_background)
             .into(holder.imageBerita)
+
+        holder.imageBerita.contentDescription = "Gambar berita: ${news.judul}"
 
         holder.itemView.setOnClickListener {
             onItemClick(news)
