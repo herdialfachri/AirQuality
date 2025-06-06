@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.airquality.entity.AirQuality
 import com.google.firebase.database.*
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pm1TextView: TextView
     private lateinit var pm25TextView: TextView
     private lateinit var pm10TextView: TextView
+    private lateinit var statusKesehatanTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         pm1TextView = findViewById(R.id.dataPm1Tv)
         pm25TextView = findViewById(R.id.dataPm25Tv)
         pm10TextView = findViewById(R.id.dataPm10Tv)
+        statusKesehatanTextView = findViewById(R.id.statusKesehatanTv)
 
         // Inisialisasi database Firebase
         database = FirebaseDatabase.getInstance("https://airquality-e6800-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -58,6 +61,28 @@ class MainActivity : AppCompatActivity() {
                             pm1TextView.text = "${data.pm1_0} µg/m³"
                             pm25TextView.text = "${data.pm2_5} µg/m³"
                             pm10TextView.text = "${data.pm10} µg/m³"
+
+                            // Kondisi jika semua PM melebihi 100
+                            if (data.pm1_0 >= 150 && data.pm2_5 >= 150 && data.pm10 >= 150) {
+                                // Sangat Buruk
+                                statusKesehatanTextView.text = getString(R.string.bad)
+                                statusKesehatanTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_gas_24, 0)
+
+                            } else if (data.pm1_0 >= 100 && data.pm2_5 >= 100 && data.pm10 >= 100) {
+                                // Tidak Sehat
+                                statusKesehatanTextView.text = getString(R.string.not_healthy)
+                                statusKesehatanTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_arrow_back_ios_new_24, 0)
+
+                            } else if (data.pm1_0 >= 50 && data.pm2_5 >= 50 && data.pm10 >= 50) {
+                                // Sedang
+                                statusKesehatanTextView.text = getString(R.string.medium)
+                                statusKesehatanTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_news_24, 0)
+
+                            } else {
+                                // Sehat
+                                statusKesehatanTextView.text = getString(R.string.healthy)
+                                statusKesehatanTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_smile_emoticon_24, 0)
+                            }
                         }
                     }
                 }
