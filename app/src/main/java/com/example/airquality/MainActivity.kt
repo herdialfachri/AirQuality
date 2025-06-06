@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var coDataTextView: TextView
     private lateinit var timestampTextView: TextView
     private lateinit var database: DatabaseReference
+    private lateinit var pm1TextView: TextView
+    private lateinit var pm25TextView: TextView
+    private lateinit var pm10TextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         co2DataTextView = findViewById(R.id.dataCo2Tv)
         coDataTextView = findViewById(R.id.dataCoTv)
         timestampTextView = findViewById(R.id.dataTimeTv)
+        pm1TextView = findViewById(R.id.dataPm1Tv)
+        pm25TextView = findViewById(R.id.dataPm25Tv)
+        pm10TextView = findViewById(R.id.dataPm10Tv)
 
         // Inisialisasi database Firebase
         database = FirebaseDatabase.getInstance("https://airquality-e6800-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -48,6 +54,10 @@ class MainActivity : AppCompatActivity() {
                             co2DataTextView.text = "${data.co2_ppm} ppm"
                             coDataTextView.text = "${data.co_ppm} ppm"
                             timestampTextView.text = data.timestamp
+
+                            pm1TextView.text = "${data.pm1_0} µg/m³"
+                            pm25TextView.text = "${data.pm2_5} µg/m³"
+                            pm10TextView.text = "${data.pm10} µg/m³"
                         }
                     }
                 }
@@ -58,6 +68,9 @@ class MainActivity : AppCompatActivity() {
                     co2DataTextView.text = "Error"
                     coDataTextView.text = "Error"
                     timestampTextView.text = "Error"
+                    pm1TextView.text = "Error"
+                    pm25TextView.text = "Error"
+                    pm10TextView.text = "Error"
                 }
             })
 

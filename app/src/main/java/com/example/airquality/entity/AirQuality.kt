@@ -5,5 +5,8 @@ data class AirQuality(
     val humidity: Double = 0.0,
     val co2_ppm: Int = 0,
     val co_ppm: Int = 0,
+    val pm1_0: Int = 0,
+    val pm2_5: Int = 0,
+    val pm10: Int = 0,
     val timestamp: String = "0"
 )

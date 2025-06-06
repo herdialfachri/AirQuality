@@ -22,4 +22,10 @@
     <string name="news5_title">Hari Bebas Kendaraan Bermotor Di Sukabumi Dimulai</string>
     <string name="news5_desc">Pemerintah Kota Sukabumi kembali menggelar Hari Bebas Kendaraan Bermotor (HBKB) di pusat kota setiap hari Minggu pagi. Kegiatan ini bertujuan mengurangi emisi kendaraan dan memberikan ruang publik yang sehat bagi masyarakat untuk berolahraga dan berinteraksi sosial.\n\nRibuan warga tampak antusias mengikuti kegiatan ini, mulai dari bersepeda, senam bersama, hingga bazar UMKM yang turut meramaikan suasana. HBKB juga dianggap sebagai sarana edukasi bagi masyarakat mengenai pentingnya menjaga kualitas udara dan mengurangi ketergantungan terhadap kendaraan bermotor pribadi.\n\nDiharapkan kegiatan ini bisa terus berlanjut dan menjadi budaya positif yang mendukung upaya pelestarian lingkungan di tingkat kota.</string>
     <string name="news5_source">Liputan6</string>
+
+    <!-- Health Status -->
+    <string name="healthy">Sehat</string>
+    <string name="medium">Sedang</string>
+    <string name="not_healthy">Tidak sehat</string>
+    <string name="bad">Buruk</string>
 </resources>
