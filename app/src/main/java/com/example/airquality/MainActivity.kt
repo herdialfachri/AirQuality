@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                                 when {
                                     pm1 >= 150 && pm25 >= 150 && pm10 >= 150 -> {
                                         statusKesehatanTv.text = getString(R.string.bad)
-                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_gas_24, 0)
+                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_sentiment_very_dissatisfied_24, 0)
                                         if (!sudahNotifikasiBahaya) {
                                             tampilkanNotifikasiBuruk()
                                             sudahNotifikasiBahaya = true
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     pm1 >= 100 && pm25 >= 100 && pm10 >= 100 -> {
                                         statusKesehatanTv.text = getString(R.string.not_healthy)
-                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_co2_24, 0)
+                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_sentiment_dissatisfied_24, 0)
                                         if (!sudahNotifikasiTidakSehat) {
                                             tampilkanNotifikasiTidakSehat()
                                             sudahNotifikasiTidakSehat = true
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     pm1 >= 50 && pm25 >= 50 && pm10 >= 50 -> {
                                         statusKesehatanTv.text = getString(R.string.medium)
-                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_news_24, 0)
+                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_sentiment_neutral_24, 0)
                                         if (!sudahNotifikasiSedang) {
                                             tampilkanNotifikasiSedang()
                                             sudahNotifikasiSedang = true
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     else -> {
                                         statusKesehatanTv.text = getString(R.string.healthy)
-                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_smile_emoticon_24, 0)
+                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_sentiment_satisfied_alt_24, 0)
                                         if (!sudahNotifikasiBaik) {
                                             tampilkanNotifikasiBaik()
                                             sudahNotifikasiBaik = true

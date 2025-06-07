@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Hi, Selamang Datang!"
+        android:text="Hi, Selamat Datang!"
         android:textColor="@color/light_blue"
         android:textSize="18sp" />
 
@@ -78,8 +78,8 @@
                         android:drawablePadding="8dp"
                         android:padding="4dp"
                         android:text="@string/healthy"
-                        android:textSize="14sp"
-                        app:drawableEndCompat="@drawable/baseline_smile_emoticon_24" />
+                        android:textSize="16sp"
+                        app:drawableEndCompat="@drawable/baseline_sentiment_satisfied_alt_24" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -100,8 +100,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/pm1Tv"
+                android:layout_alignBottom="@id/pm1Tv"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp"
                 android:text="--" />
 
             <TextView
@@ -119,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/pm25Tv"
+                android:layout_alignBottom="@id/pm25Tv"
                 android:layout_alignParentEnd="true"
                 android:text="--" />
 
@@ -137,6 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/pm10Tv"
+                android:layout_alignBottom="@id/pm10Tv"
                 android:layout_alignParentEnd="true"
                 android:text="--" />
 
