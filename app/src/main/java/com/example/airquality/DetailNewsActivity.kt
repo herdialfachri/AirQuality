@@ -3,7 +3,9 @@ package com.example.airquality
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -11,15 +13,27 @@ import java.util.Locale
 
 class DetailNewsActivity : AppCompatActivity() {
 
-    private lateinit var backButton: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_news)
 
-        backButton = findViewById(R.id.arrowBackBtnDetail)
-        backButton.setOnClickListener {
-            onBackPressed()
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                view.textSize = 18f
+                val typeface = ResourcesCompat.getFont(this, R.font.poppins_medium)
+                view.typeface = typeface
+                break
+            }
         }
 
         val judul = intent.getStringExtra("judul")

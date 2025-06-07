@@ -39,7 +39,7 @@ class NewsAdapter(
 
         Glide.with(holder.itemView.context)
             .load(news.gambar)
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(R.color.gray)
             .into(holder.imageBerita)
 
         holder.imageBerita.contentDescription = "Gambar berita: ${news.judul}"

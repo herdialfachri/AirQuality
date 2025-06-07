@@ -67,6 +67,30 @@ abstract class AppDatabase : RoomDatabase() {
                                             pengupload = "Admin"
                                         ),
                                         NewsEntity(
+                                            judul = context.getString(R.string.news6_title),
+                                            gambar = "https://image.sggp.org.vn/w1000/Uploaded/2024/negesfjozly/2023_12_16/p4c-3839jpg-5461.jpg",
+                                            sumber = context.getString(R.string.news6_source),
+                                            deskripsi = context.getString(R.string.news6_desc),
+                                            tanggalUpload = System.currentTimeMillis(),
+                                            pengupload = "Admin"
+                                        ),
+                                        NewsEntity(
+                                            judul = context.getString(R.string.news7_title),
+                                            gambar = "https://lh5.googleusercontent.com/Unq1_cfyWqlDTxZIfEHde2MU_GJm9G_YgH2d9pTXM75EEHxoIukBFcS9LNfZHknich4gkwomRVuL5OSwQ4eJWY_IfwsE94UbYrdR7_lOXZkAJciKFGjXA-2VNOc2hbm_Oftlr-s",
+                                            sumber = context.getString(R.string.news7_source),
+                                            deskripsi = context.getString(R.string.news7_desc),
+                                            tanggalUpload = System.currentTimeMillis(),
+                                            pengupload = "Admin"
+                                        ),
+                                        NewsEntity(
+                                            judul = context.getString(R.string.news8_title),
+                                            gambar = "https://statik.tempo.co/data/2020/11/24/id_982822/982822_720.jpg",
+                                            sumber = context.getString(R.string.news8_source),
+                                            deskripsi = context.getString(R.string.news8_desc),
+                                            tanggalUpload = System.currentTimeMillis(),
+                                            pengupload = "Admin"
+                                        ),
+                                        NewsEntity(
                                             judul = context.getString(R.string.news5_title),
                                             gambar = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2025/04/19/2490729177.jpg",
                                             sumber = context.getString(R.string.news5_source),

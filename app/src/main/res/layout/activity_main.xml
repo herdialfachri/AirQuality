@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/welcomeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="24dp"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:text="Hi, Selamang Datang!"
         android:textColor="@color/light_blue"
-        android:textSize="20sp"
-        android:text="Hi, Selamang Datang!" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/sloganTv"
@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/welcomeTv"
         android:layout_alignStart="@id/welcomeTv"
-        android:textSize="14sp"
-        android:text="Kualitas udara diujung jari Anda"/>
+        android:text="Air Quality: Kualitas udara diujung jari Anda"
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/toNewsBtn"
@@ -45,11 +45,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/sloganTv"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="40dp"
-        app:cardElevation="8dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/light_blue"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,12 +58,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/statusCv"
-                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:backgroundTint="@color/white"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -74,12 +74,11 @@
                         android:id="@+id/statusKesehatanTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/healthy"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
-                        android:padding="4dp"
-                        android:textColor="@color/black"
                         android:drawablePadding="8dp"
+                        android:padding="4dp"
+                        android:text="@string/healthy"
+                        android:textSize="14sp"
                         app:drawableEndCompat="@drawable/baseline_smile_emoticon_24" />
 
                 </RelativeLayout>
@@ -87,71 +86,59 @@
 
             <TextView
                 android:id="@+id/pm1Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_below="@id/statusCv"
-                android:layout_marginTop="8dp"
                 android:layout_alignParentStart="true"
-                android:textSize="16sp"
-                android:padding="4dp"
-                android:text="PM1"/>
+                android:layout_marginTop="8dp"
+                android:text="PM1" />
 
             <TextView
                 android:id="@+id/dataPm1Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/statusCv"
+                android:layout_alignTop="@id/pm1Tv"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/pm25Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pm1Tv"
                 android:layout_alignStart="@id/pm1Tv"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:padding="4dp"
-                android:text="PM2.5"/>
+                android:text="PM2.5" />
 
             <TextView
                 android:id="@+id/dataPm25Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataPm1Tv"
+                android:layout_alignTop="@id/pm25Tv"
                 android:layout_alignParentEnd="true"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/pm10Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pm25Tv"
                 android:layout_alignStart="@id/pm1Tv"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:padding="4dp"
-                android:text="PM10"/>
+                android:text="PM10" />
 
             <TextView
                 android:id="@+id/dataPm10Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataPm25Tv"
+                android:layout_alignTop="@id/pm10Tv"
                 android:layout_alignParentEnd="true"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -162,11 +149,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/zh03bCv"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/light_blue"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -175,145 +162,114 @@
 
             <TextView
                 android:id="@+id/temperatureTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Suhu"
-                android:padding="4dp"
-                android:drawablePadding="8dp"
-                android:textColor="@color/white"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:drawablePadding="8dp"
+                android:text="Suhu"
                 app:drawableStartCompat="@drawable/baseline_temperature_24" />
 
             <TextView
                 android:id="@+id/dataTempTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_alignTop="@id/temperatureTv"
                 android:layout_alignParentEnd="true"
-                android:text="--"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/humidityTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/temperatureTv"
-                app:drawableStartCompat="@drawable/baseline_humidity_24"
-                android:drawablePadding="8dp"
                 android:layout_alignStart="@id/temperatureTv"
-                android:padding="4dp"
+                android:drawablePadding="8dp"
                 android:text="Kelembaban"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                app:drawableStartCompat="@drawable/baseline_humidity_24" />
 
             <TextView
                 android:id="@+id/dataHumiTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataTempTv"
+                android:layout_alignTop="@id/humidityTv"
                 android:layout_alignEnd="@id/dataTempTv"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/co2Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/humidityTv"
-                android:text="Kandungan CO2"
                 android:layout_alignStart="@id/temperatureTv"
-                android:textColor="@color/white"
-                android:padding="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:drawablePadding="8dp"
+                android:text="Kandungan CO2"
                 app:drawableStartCompat="@drawable/baseline_co2_24" />
 
             <TextView
                 android:id="@+id/dataCo2Tv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataHumiTv"
+                android:layout_alignTop="@id/co2Tv"
                 android:layout_alignEnd="@id/dataTempTv"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/coTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/temperatureTv"
-                android:text="Kandungan CO"
-                app:drawableStartCompat="@drawable/baseline_gas_24"
                 android:layout_below="@id/co2Tv"
-                android:padding="4dp"
-                android:textColor="@color/white"
+                android:layout_alignStart="@id/temperatureTv"
                 android:drawablePadding="8dp"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="Kandungan CO"
+                app:drawableStartCompat="@drawable/baseline_gas_24" />
 
             <TextView
                 android:id="@+id/dataCoTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@id/coTv"
                 android:layout_alignEnd="@id/dataTempTv"
-                android:layout_below="@id/dataCo2Tv"
-                android:padding="4dp"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
             <TextView
                 android:id="@+id/timeTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/temperatureTv"
-                android:text="Waktu"
-                android:padding="4dp"
-                android:drawablePadding="8dp"
-                app:drawableStartCompat="@drawable/baseline_access_time_filled_24"
                 android:layout_below="@id/coTv"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_alignStart="@id/temperatureTv"
+                android:drawablePadding="8dp"
+                android:text="Waktu"
+                app:drawableStartCompat="@drawable/baseline_access_time_filled_24" />
 
             <TextView
                 android:id="@+id/dataTimeTv"
+                style="@style/WhiteText14Padding4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dataCoTv"
-                android:padding="4dp"
+                android:layout_alignTop="@id/timeTv"
                 android:layout_alignEnd="@id/dataTempTv"
-                android:text="--"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="--" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
-        android:layout_marginVertical="16dp"
-        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
-        android:layout_below="@id/presentaseCv"
-        android:layout_height="300dp"/>
-
-    <TextView
-        android:id="@+id/waktu"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/barChart"
-        android:text="tanggal"/>
+        android:layout_below="@id/presentaseCv"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="32dp" />
 
 </RelativeLayout>
