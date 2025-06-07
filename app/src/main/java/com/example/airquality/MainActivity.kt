@@ -14,6 +14,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.airquality.databinding.ActivityMainBinding
 import com.example.airquality.entity.AirQuality
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private val CHANNEL_ID = "air_quality_channel"
     private var sudahNotifikasiBuruk = false
+    private lateinit var barChart: BarChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase
             .getInstance("https://airquality-e6800-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("air_quality")
+
+        // Inisialisasi chart
+        barChart = binding.barChart
 
         database.orderByChild("timestamp").limitToLast(1)
             .addValueEventListener(object : ValueEventListener {
@@ -59,6 +69,9 @@ class MainActivity : AppCompatActivity() {
                                 val pm1 = data.pm1_0
                                 val pm25 = data.pm2_5
                                 val pm10 = data.pm10
+
+                                // ========== Bagian Chart ==========
+                                tampilkanBarChart(data)
 
                                 when {
                                     pm1 >= 150 && pm25 >= 150 && pm10 >= 150 -> {
@@ -107,6 +120,40 @@ class MainActivity : AppCompatActivity() {
         binding.toNewsBtn.setOnClickListener {
             startActivity(Intent(this, NewsActivity::class.java))
         }
+    }
+
+    private fun tampilkanBarChart(data: AirQuality) {
+        val entries = ArrayList<BarEntry>()
+        val labels = listOf("CO2", "CO", "PM1.0", "PM2.5", "PM10", "Temp", "Humidity")
+
+        entries.add(BarEntry(0f, data.co2_ppm.toFloat()))
+        entries.add(BarEntry(1f, data.co_ppm.toFloat()))
+        entries.add(BarEntry(2f, data.pm1_0.toFloat()))
+        entries.add(BarEntry(3f, data.pm2_5.toFloat()))
+        entries.add(BarEntry(4f, data.pm10.toFloat()))
+        entries.add(BarEntry(5f, data.temperature.toFloat()))
+        entries.add(BarEntry(6f, data.humidity.toFloat()))
+
+        val dataSet = BarDataSet(entries, "Data Kualitas Udara")
+        dataSet.setColors(
+            resources.getColor(R.color.dark_midnight_blue, null),
+            resources.getColor(R.color.dark_slate_blue, null),
+            resources.getColor(R.color.purple_iris, null),
+            resources.getColor(R.color.medium_orchid, null),
+            resources.getColor(R.color.pale_violet_red, null),
+            resources.getColor(R.color.coral_pink, null),
+            resources.getColor(R.color.orange_red, null)
+        )
+        dataSet.valueTextSize = 12f
+
+        val barData = BarData(dataSet)
+        barChart.data = barData
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+        barChart.xAxis.granularity = 1f
+        barChart.xAxis.labelRotationAngle = -45f
+        barChart.description = Description().apply { text = "Data Sensor" }
+        barChart.animateY(1000)
+        barChart.invalidate()
     }
 
     private fun createNotificationChannel() {

@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#4E84C1</color>
     <color name="gray">#D0D0D0</color>
+    <color name="dark_midnight_blue">#003f5c</color>
+    <color name="dark_slate_blue">#2f4b7c</color>
+    <color name="purple_iris">#665191</color>
+    <color name="medium_orchid">#a05195</color>
+    <color name="pale_violet_red">#d45087</color>
+    <color name="coral_pink">#f95d6a</color>
+    <color name="orange_red">#ff7c43</color>
 </resources>
