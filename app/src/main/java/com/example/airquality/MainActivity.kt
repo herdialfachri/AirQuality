@@ -8,13 +8,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.airquality.databinding.ActivityMainBinding
 import com.example.airquality.entity.AirQuality
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: DatabaseReference
     private val CHANNEL_ID = "air_quality_channel"
-    private var sudahNotifikasiBuruk = false
-    private lateinit var barChart: BarChart
+    private var sudahNotifikasiBaik = false
+    private var sudahNotifikasiSedang = false
+    private var sudahNotifikasiBahaya = false
+    private var sudahNotifikasiTidakSehat = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +47,6 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase
             .getInstance("https://airquality-e6800-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("air_quality")
-
-        // Inisialisasi chart
-        barChart = binding.barChart
 
         database.orderByChild("timestamp").limitToLast(1)
             .addValueEventListener(object : ValueEventListener {
@@ -70,32 +69,53 @@ class MainActivity : AppCompatActivity() {
                                 val pm25 = data.pm2_5
                                 val pm10 = data.pm10
 
-                                // ========== Bagian Chart ==========
+                                // Tampilkan chart langsung pakai binding.barChart
                                 tampilkanBarChart(data)
 
                                 when {
                                     pm1 >= 150 && pm25 >= 150 && pm10 >= 150 -> {
                                         statusKesehatanTv.text = getString(R.string.bad)
                                         statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_gas_24, 0)
-                                        if (!sudahNotifikasiBuruk) {
+                                        if (!sudahNotifikasiBahaya) {
                                             tampilkanNotifikasiBuruk()
-                                            sudahNotifikasiBuruk = true
+                                            sudahNotifikasiBahaya = true
+                                            sudahNotifikasiTidakSehat = false
+                                            sudahNotifikasiSedang = false
+                                            sudahNotifikasiBaik = false
                                         }
                                     }
                                     pm1 >= 100 && pm25 >= 100 && pm10 >= 100 -> {
                                         statusKesehatanTv.text = getString(R.string.not_healthy)
-                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_arrow_back_ios_new_24, 0)
-                                        sudahNotifikasiBuruk = false
+                                        statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_co2_24, 0)
+                                        if (!sudahNotifikasiTidakSehat) {
+                                            tampilkanNotifikasiTidakSehat()
+                                            sudahNotifikasiTidakSehat = true
+                                            sudahNotifikasiBahaya = false
+                                            sudahNotifikasiSedang = false
+                                            sudahNotifikasiBaik = false
+                                        }
                                     }
                                     pm1 >= 50 && pm25 >= 50 && pm10 >= 50 -> {
                                         statusKesehatanTv.text = getString(R.string.medium)
                                         statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_news_24, 0)
-                                        sudahNotifikasiBuruk = false
+                                        if (!sudahNotifikasiSedang) {
+                                            tampilkanNotifikasiSedang()
+                                            sudahNotifikasiSedang = true
+                                            sudahNotifikasiBahaya = false
+                                            sudahNotifikasiTidakSehat = false
+                                            sudahNotifikasiBaik = false
+                                        }
                                     }
                                     else -> {
                                         statusKesehatanTv.text = getString(R.string.healthy)
                                         statusKesehatanTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_smile_emoticon_24, 0)
-                                        sudahNotifikasiBuruk = false
+                                        if (!sudahNotifikasiBaik) {
+                                            tampilkanNotifikasiBaik()
+                                            sudahNotifikasiBaik = true
+                                            sudahNotifikasiBahaya = false
+                                            sudahNotifikasiTidakSehat = false
+                                            sudahNotifikasiSedang = false
+                                        }
                                     }
                                 }
                             }
@@ -104,16 +124,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    with(binding) {
-                        dataTempTv.text = "Error: ${error.message}"
-                        dataHumiTv.text = "Error"
-                        dataCo2Tv.text = "Error"
-                        dataCoTv.text = "Error"
-                        dataTimeTv.text = "Error"
-                        dataPm1Tv.text = "Error"
-                        dataPm25Tv.text = "Error"
-                        dataPm10Tv.text = "Error"
-                    }
+                    tampilkanError()
                 }
             })
 
@@ -147,13 +158,27 @@ class MainActivity : AppCompatActivity() {
         dataSet.valueTextSize = 12f
 
         val barData = BarData(dataSet)
-        barChart.data = barData
-        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-        barChart.xAxis.granularity = 1f
-        barChart.xAxis.labelRotationAngle = -45f
-        barChart.description = Description().apply { text = "Data Sensor" }
-        barChart.animateY(1000)
-        barChart.invalidate()
+        binding.barChart.data = barData
+        binding.barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+        binding.barChart.xAxis.granularity = 1f
+        binding.barChart.xAxis.labelRotationAngle = -45f
+        binding.barChart.description = Description().apply { text = "Data Sensor" }
+        binding.barChart.animateY(1000)
+        binding.barChart.invalidate()
+    }
+
+    private fun tampilkanError() {
+        with(binding) {
+            val errorMsg = "Terdapat kesalahan"
+            dataTempTv.text = errorMsg
+            dataHumiTv.text = errorMsg
+            dataCo2Tv.text = errorMsg
+            dataCoTv.text = errorMsg
+            dataTimeTv.text = errorMsg
+            dataPm1Tv.text = errorMsg
+            dataPm25Tv.text = errorMsg
+            dataPm10Tv.text = errorMsg
+        }
     }
 
     private fun createNotificationChannel() {
@@ -168,19 +193,51 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun tampilkanNotifikasiBuruk() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
+    private fun tampilkanNotifikasiBaik() {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Status Udara Sangat Buruk!")
-            .setContentText("Kadar PM sangat tinggi. Hindari aktivitas di luar ruangan.")
+            .setContentTitle("Udara Baik")
+            .setContentText("Kualitas udara dalam kondisi baik. Tetap jaga kesehatan!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
-        NotificationManagerCompat.from(this).notify(1, builder.build())
+        NotificationManagerCompat.from(this).notify(2, builder.build())
+    }
+
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
+    private fun tampilkanNotifikasiSedang() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Udara Sedang")
+            .setContentText("Kualitas udara sedang. Waspadai perubahan cuaca.")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        NotificationManagerCompat.from(this).notify(3, builder.build())
+    }
+
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
+    private fun tampilkanNotifikasiTidakSehat() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Udara Tidak Sehat")
+            .setContentText("Udara tidak sehat. Gunakan masker saat keluar rumah.")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        NotificationManagerCompat.from(this).notify(4, builder.build())
+    }
+
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
+    private fun tampilkanNotifikasiBuruk() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Udara Berbahaya")
+            .setContentText("Kualitas udara sangat buruk. Segera hindari aktivitas luar ruangan!")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        NotificationManagerCompat.from(this).notify(5, builder.build())
     }
 }
