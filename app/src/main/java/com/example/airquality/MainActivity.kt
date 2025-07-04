@@ -161,9 +161,11 @@ class MainActivity : AppCompatActivity() {
                     } catch (_: Exception) {}
                 }
 
+                val allTanggal = pm1Map.keys.toList()
+                val tanggalList = if (allTanggal.size > 7) allTanggal.takeLast(7) else allTanggal
+
                 val pm1Entries = ArrayList<BarEntry>()
                 val pm25Entries = ArrayList<BarEntry>()
-                val tanggalList = pm1Map.keys.toList()  // dipastikan urut
 
                 for ((index, tanggal) in tanggalList.withIndex()) {
                     val rataPM1 = pm1Map[tanggal]?.average()?.toFloat() ?: 0f
@@ -171,6 +173,7 @@ class MainActivity : AppCompatActivity() {
                     pm1Entries.add(BarEntry(index.toFloat(), rataPM1))
                     pm25Entries.add(BarEntry(index.toFloat(), rataPM25))
                 }
+
 
                 // Set chart PM1
                 val pm1DataSet = BarDataSet(pm1Entries, "Rata-rata PM1 (µg/m³)")
