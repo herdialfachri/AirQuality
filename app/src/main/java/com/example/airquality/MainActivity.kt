@@ -21,6 +21,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,9 +70,6 @@ class MainActivity : AppCompatActivity() {
                                 val pm1 = data.pm1_0
                                 val pm25 = data.pm2_5
                                 val pm10 = data.pm10
-
-                                // Tampilkan chart langsung pakai binding.barChart
-                                tampilkanBarChart(data)
 
                                 when {
                                     pm1 >= 150 && pm25 >= 150 && pm10 >= 150 -> {
@@ -128,43 +127,76 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
+        tampilkanChartPM1danPM25()
+
         binding.toNewsBtn.setOnClickListener {
             startActivity(Intent(this, NewsActivity::class.java))
         }
     }
 
-    private fun tampilkanBarChart(data: AirQuality) {
-        val entries = ArrayList<BarEntry>()
-        val labels = listOf("CO2", "CO", "PM1.0", "PM2.5", "PM10", "Temp", "Humidity")
+    private fun tampilkanChartPM1danPM25() {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val displayFormat = SimpleDateFormat("dd MMM", Locale("id", "ID"))
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -6)
+        val sevenDaysAgo = calendar.time
 
-        entries.add(BarEntry(0f, data.co2_ppm.toFloat()))
-        entries.add(BarEntry(1f, data.co_ppm.toFloat()))
-        entries.add(BarEntry(2f, data.pm1_0.toFloat()))
-        entries.add(BarEntry(3f, data.pm2_5.toFloat()))
-        entries.add(BarEntry(4f, data.pm10.toFloat()))
-        entries.add(BarEntry(5f, data.temperature.toFloat()))
-        entries.add(BarEntry(6f, data.humidity.toFloat()))
+        val pm1Map = sortedMapOf<String, MutableList<Int>>()
+        val pm25Map = sortedMapOf<String, MutableList<Int>>()
 
-        val dataSet = BarDataSet(entries, "Data Kualitas Udara")
-        dataSet.setColors(
-            resources.getColor(R.color.dark_midnight_blue, null),
-            resources.getColor(R.color.dark_slate_blue, null),
-            resources.getColor(R.color.purple_iris, null),
-            resources.getColor(R.color.medium_orchid, null),
-            resources.getColor(R.color.pale_violet_red, null),
-            resources.getColor(R.color.coral_pink, null),
-            resources.getColor(R.color.orange_red, null)
-        )
-        dataSet.valueTextSize = 12f
+        database.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                pm1Map.clear()
+                pm25Map.clear()
 
-        val barData = BarData(dataSet)
-        binding.barChart.data = barData
-        binding.barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-        binding.barChart.xAxis.granularity = 1f
-        binding.barChart.xAxis.labelRotationAngle = -45f
-        binding.barChart.description = Description().apply { text = "Data Sensor" }
-        binding.barChart.animateY(1000)
-        binding.barChart.invalidate()
+                for (child in snapshot.children) {
+                    val data = child.getValue(AirQuality::class.java) ?: continue
+                    try {
+                        val date = dateFormat.parse(data.timestamp) ?: continue
+                        if (date.before(sevenDaysAgo)) continue
+
+                        val labelTanggal = displayFormat.format(date) // contoh: "02 Jul"
+                        pm1Map.getOrPut(labelTanggal) { mutableListOf() }.add(data.pm1_0)
+                        pm25Map.getOrPut(labelTanggal) { mutableListOf() }.add(data.pm2_5)
+                    } catch (_: Exception) {}
+                }
+
+                val pm1Entries = ArrayList<BarEntry>()
+                val pm25Entries = ArrayList<BarEntry>()
+                val tanggalList = pm1Map.keys.toList()  // dipastikan urut
+
+                for ((index, tanggal) in tanggalList.withIndex()) {
+                    val rataPM1 = pm1Map[tanggal]?.average()?.toFloat() ?: 0f
+                    val rataPM25 = pm25Map[tanggal]?.average()?.toFloat() ?: 0f
+                    pm1Entries.add(BarEntry(index.toFloat(), rataPM1))
+                    pm25Entries.add(BarEntry(index.toFloat(), rataPM25))
+                }
+
+                // Set chart PM1
+                val pm1DataSet = BarDataSet(pm1Entries, "Rata-rata PM1 (µg/m³)")
+                pm1DataSet.color = resources.getColor(R.color.dark_slate_blue, null)
+                binding.pm1Chart.data = BarData(pm1DataSet)
+                binding.pm1Chart.xAxis.valueFormatter = IndexAxisValueFormatter(tanggalList)
+                binding.pm1Chart.xAxis.granularity = 1f
+                binding.pm1Chart.xAxis.labelRotationAngle = -45f
+                binding.pm1Chart.description = Description().apply { text = "PM1 - 7 Hari Terakhir" }
+                binding.pm1Chart.animateY(1000)
+                binding.pm1Chart.invalidate()
+
+                // Set chart PM2.5
+                val pm25DataSet = BarDataSet(pm25Entries, "Rata-rata PM2.5 (µg/m³)")
+                pm25DataSet.color = resources.getColor(R.color.medium_orchid, null)
+                binding.pm25Chart.data = BarData(pm25DataSet)
+                binding.pm25Chart.xAxis.valueFormatter = IndexAxisValueFormatter(tanggalList)
+                binding.pm25Chart.xAxis.granularity = 1f
+                binding.pm25Chart.xAxis.labelRotationAngle = -45f
+                binding.pm25Chart.description = Description().apply { text = "PM2.5 - 7 Hari Terakhir" }
+                binding.pm25Chart.animateY(1000)
+                binding.pm25Chart.invalidate()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun tampilkanError() {

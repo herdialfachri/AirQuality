@@ -1,277 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/welcomeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Hi, Selamat Datang!"
-        android:textColor="@color/light_blue"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/sloganTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/welcomeTv"
-        android:layout_alignStart="@id/welcomeTv"
-        android:text="Air Quality: Kualitas udara diujung jari Anda"
-        android:textSize="11sp" />
-
-    <ImageView
-        android:id="@+id/toNewsBtn"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/baseline_news_24" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/zh03bCv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sloganTv"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/light_blue"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="32dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_marginTop="16dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/statusCv"
+            <TextView
+                android:id="@+id/welcomeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Hi, Selamat Datang!"
+                android:textColor="@color/light_blue"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/toNewsBtn"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/baseline_news_24" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/sloganTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Air Quality: Kualitas udara diujung jari Anda"
+            android:textSize="11sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- CARD: ZH03B -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/zh03bCv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/light_blue"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp">
+                android:padding="16dp">
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/statusCv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp">
 
-                    <TextView
-                        android:id="@+id/statusKesehatanTv"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:drawablePadding="8dp"
-                        android:padding="4dp"
-                        android:text="@string/healthy"
-                        android:textSize="16sp"
-                        app:drawableEndCompat="@drawable/baseline_sentiment_satisfied_alt_24" />
+                        android:padding="8dp">
 
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/statusKesehatanTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:drawablePadding="8dp"
+                            android:padding="4dp"
+                            android:text="@string/healthy"
+                            android:textSize="16sp"
+                            app:drawableEndCompat="@drawable/baseline_sentiment_satisfied_alt_24" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/pm1Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/statusCv"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp"
-                android:text="PM1" />
+                <TextView
+                    android:id="@+id/pm1Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusCv"
+                    android:layout_marginTop="8dp"
+                    android:text="PM1" />
 
-            <TextView
-                android:id="@+id/dataPm1Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/pm1Tv"
-                android:layout_alignBottom="@id/pm1Tv"
-                android:layout_alignParentEnd="true"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/dataPm1Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/pm1Tv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/pm25Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pm1Tv"
-                android:layout_alignStart="@id/pm1Tv"
-                android:text="PM2.5" />
+                <TextView
+                    android:id="@+id/pm25Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pm1Tv"
+                    android:text="PM2.5" />
 
-            <TextView
-                android:id="@+id/dataPm25Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/pm25Tv"
-                android:layout_alignBottom="@id/pm25Tv"
-                android:layout_alignParentEnd="true"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/dataPm25Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/pm25Tv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/pm10Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pm25Tv"
-                android:layout_alignStart="@id/pm1Tv"
-                android:text="PM10" />
+                <TextView
+                    android:id="@+id/pm10Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pm25Tv"
+                    android:text="PM10" />
 
-            <TextView
-                android:id="@+id/dataPm10Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/pm10Tv"
-                android:layout_alignBottom="@id/pm10Tv"
-                android:layout_alignParentEnd="true"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/dataPm10Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/pm10Tv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/presentaseCv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/zh03bCv"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/light_blue"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
-
-        <RelativeLayout
+        <!-- CARD: PERSENTASE -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/presentaseCv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/light_blue"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
 
-            <TextView
-                android:id="@+id/temperatureTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:drawablePadding="8dp"
-                android:text="Suhu"
-                app:drawableStartCompat="@drawable/baseline_temperature_24" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/dataTempTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/temperatureTv"
-                android:layout_alignParentEnd="true"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/temperatureTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="Suhu"
+                    app:drawableStartCompat="@drawable/baseline_temperature_24" />
 
-            <TextView
-                android:id="@+id/humidityTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/temperatureTv"
-                android:layout_alignStart="@id/temperatureTv"
-                android:drawablePadding="8dp"
-                android:text="Kelembaban"
-                app:drawableStartCompat="@drawable/baseline_humidity_24" />
+                <TextView
+                    android:id="@+id/dataTempTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/temperatureTv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/dataHumiTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/humidityTv"
-                android:layout_alignEnd="@id/dataTempTv"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/humidityTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/temperatureTv"
+                    android:drawablePadding="8dp"
+                    android:text="Kelembaban"
+                    app:drawableStartCompat="@drawable/baseline_humidity_24" />
 
-            <TextView
-                android:id="@+id/co2Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/humidityTv"
-                android:layout_alignStart="@id/temperatureTv"
-                android:drawablePadding="8dp"
-                android:text="Kandungan CO2"
-                app:drawableStartCompat="@drawable/baseline_co2_24" />
+                <TextView
+                    android:id="@+id/dataHumiTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/humidityTv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/dataCo2Tv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/co2Tv"
-                android:layout_alignEnd="@id/dataTempTv"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/co2Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/humidityTv"
+                    android:drawablePadding="8dp"
+                    android:text="Kandungan CO2"
+                    app:drawableStartCompat="@drawable/baseline_co2_24" />
 
-            <TextView
-                android:id="@+id/coTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/co2Tv"
-                android:layout_alignStart="@id/temperatureTv"
-                android:drawablePadding="8dp"
-                android:text="Kandungan CO"
-                app:drawableStartCompat="@drawable/baseline_gas_24" />
+                <TextView
+                    android:id="@+id/dataCo2Tv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/co2Tv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/dataCoTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/coTv"
-                android:layout_alignEnd="@id/dataTempTv"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/coTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/co2Tv"
+                    android:drawablePadding="8dp"
+                    android:text="Kandungan CO"
+                    app:drawableStartCompat="@drawable/baseline_gas_24" />
 
-            <TextView
-                android:id="@+id/timeTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/coTv"
-                android:layout_alignStart="@id/temperatureTv"
-                android:drawablePadding="8dp"
-                android:text="Waktu"
-                app:drawableStartCompat="@drawable/baseline_access_time_filled_24" />
+                <TextView
+                    android:id="@+id/dataCoTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/coTv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
 
-            <TextView
-                android:id="@+id/dataTimeTv"
-                style="@style/WhiteText14Padding4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/timeTv"
-                android:layout_alignEnd="@id/dataTempTv"
-                android:text="--" />
+                <TextView
+                    android:id="@+id/timeTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/coTv"
+                    android:drawablePadding="8dp"
+                    android:text="Waktu"
+                    app:drawableStartCompat="@drawable/baseline_access_time_filled_24" />
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/dataTimeTv"
+                    style="@style/WhiteText14Padding4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/timeTv"
+                    android:layout_alignParentEnd="true"
+                    android:text="--" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/presentaseCv"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="32dp" />
+        <!-- CHART PM1 -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/pm1Chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp" />
 
-</RelativeLayout>
+        <!-- CHART PM2.5 -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/pm25Chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>
